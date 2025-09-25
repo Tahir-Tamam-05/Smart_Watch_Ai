@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.dll
+*.yml
+*.h5
+*.ckpt
+*.pth
+*.zip
+*.tar
+

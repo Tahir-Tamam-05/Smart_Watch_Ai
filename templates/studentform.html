@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Student Form · AI-based Student Monitoring{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card card-modern">
+      <div class="card-body">
+        <h4 class="mb-3">Student Details</h4>
+        <form action="{{ url_for('studentform') }}" method="post" novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="name" class="form-label">Name <span class="req">*</span></label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="John Doe" required>
+            </div>
+            <div class="col-md-6">
+              <label for="moodle_id" class="form-label">Moodle ID <span class="req">*</span></label>
+              <input type="text" class="form-control" id="moodle_id" name="moodle_id" placeholder="e.g., 123456" required>
+            </div>
+            <div class="col-md-6">
+              <label for="email" class="form-label">Email <span class="req">*</span></label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="student@example.com" required>
+            </div>
+            <div class="col-md-6">
+              <label for="parent_email" class="form-label">Parent's Email <span class="req">*</span></label>
+              <input type="email" class="form-control" id="parent_email" name="parent_email" placeholder="parent@example.com" required>
+            </div>
+            <div class="col-md-6">
+              <label for="contact_number" class="form-label">Contact Number <span class="req">*</span></label>
+              <input type="tel" class="form-control" id="contact_number" name="contact_number" placeholder="10-15 digits" required>
+            </div>
+          </div>
+          <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-brand"><i class="bi bi-check2-circle me-1"></i>Submit</button>
+            <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

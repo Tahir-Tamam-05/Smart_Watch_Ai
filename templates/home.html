@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block title %}Home · AI-based Student Monitoring{% endblock %}
+
+{% block content %}
+  <div class="row align-items-center mb-4">
+    <div class="col-lg-8">
+      <h1 class="display-6 fw-semibold">AI-based Student Monitoring</h1>
+      <p class="text-secondary mb-0">Manage student details, process attendance, visualize trends, and notify stakeholders — all in one place.</p>
+    </div>
+    <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+      {% if session.get('admin_logged_in') %}
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-brand"><i class="bi bi-speedometer2 me-1"></i>Go to Admin Dashboard</a>
+      {% else %}
+        <a href="{{ url_for('admin_login') }}" class="btn btn-brand"><i class="bi bi-person-lock me-1"></i>Admin Login</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-md-6 col-xl-4">
+      <div class="card card-modern h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-2">
+            <div class="me-2 text-primary"><i class="bi bi-person-plus fs-4"></i></div>
+            <h5 class="card-title mb-0">Student Form</h5>
+          </div>
+          <p class="text-secondary">Submit or update student details which can also be used for attendance mapping and email notifications.</p>
+          <a href="{{ url_for('studentform') }}" class="btn btn-outline-primary">Open Form</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-4">
+      <div class="card card-modern h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-2">
+            <div class="me-2 text-success"><i class="bi bi-clipboard-check fs-4"></i></div>
+            <h5 class="card-title mb-0">Process Attendance</h5>
+          </div>
+          <p class="text-secondary">Provide total classes and process per-subject CSVs to generate attendance summaries.</p>
+          <a href="{{ url_for('studentattendance') }}" class="btn btn-outline-success">Process Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-4">
+      <div class="card card-modern h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-2">
+            <div class="me-2 text-info"><i class="bi bi-table fs-4"></i></div>
+            <h5 class="card-title mb-0">Overall Attendance</h5>
+          </div>
+          <p class="text-secondary">Merge all subject summaries and view overall attendance for each student.</p>
+          <a href="{{ url_for('overall_attendance') }}" class="btn btn-outline-info">Generate & View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-4">
+      <div class="card card-modern h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-2">
+            <div class="me-2 text-warning"><i class="bi bi-bar-chart-line fs-4"></i></div>
+            <h5 class="card-title mb-0">Visualize</h5>
+          </div>
+          <p class="text-secondary">View charts for key attendance segments (above 90%, below 50%, etc.).</p>
+          <a href="{{ url_for('visualize') }}" class="btn btn-outline-warning">Open Charts</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-4">
+      <div class="card card-modern h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-2">
+            <div class="me-2 text-danger"><i class="bi bi-envelope-exclamation fs-4"></i></div>
+            <h5 class="card-title mb-0">Email Alerts</h5>
+          </div>
+          <p class="text-secondary">Send notifications to students and parents whose attendance is below threshold.</p>
+          <a href="{{ url_for('send_mail') }}" class="btn btn-outline-danger">Review & Send</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-4">
+      <div class="card card-modern h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-2">
+            <div class="me-2 text-secondary"><i class="bi bi-journal-text fs-4"></i></div>
+            <h5 class="card-title mb-0">Documentation</h5>
+          </div>
+          <p class="text-secondary">Prepare CSVs in Attendance_management/Attendance/<subject>/ and ensure studentdetails.csv is available.</p>
+          <a href="#" class="btn btn-outline-secondary disabled" tabindex="-1" aria-disabled="true">Coming Soon</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

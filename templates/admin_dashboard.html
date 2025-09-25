@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard · AI-based Student Monitoring{% endblock %}
+
+{% block content %}
+<h2 class="mb-3">Admin Dashboard</h2>
+<div class="row g-3">
+  <div class="col-lg-4">
+    <div class="card card-modern h-100">
+      <div class="card-body">
+        <h5 class="card-title">Add Student</h5>
+        <form action="{{ url_for('add_student') }}" method="post" class="mt-2">
+          <div class="mb-2">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Moodle ID</label>
+            <input type="text" class="form-control" name="moodle_id" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" required>
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Parent's Email</label>
+            <input type="email" class="form-control" name="parent_email" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Contact Number</label>
+            <input type="text" class="form-control" name="contact_number" required>
+          </div>
+          <button type="submit" class="btn btn-brand w-100">Add</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card card-modern">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h5 class="card-title mb-0">Students</h5>
+          <span class="text-muted small">{{ students|length }} total</span>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Moodle ID</th>
+                <th>Email</th>
+                <th>Parent Email</th>
+                <th>Contact</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in students %}
+                {% set name = row[0] %}
+                {% set moodle = row[1] %}
+                {% set email = row[2] %}
+                {% set parent_email = row[3] %}
+                {% set contact = row[4] %}
+                <tr>
+                  <td>{{ name }}</td>
+                  <td><span class="badge bg-light text-dark">{{ moodle }}</span></td>
+                  <td>{{ email }}</td>
+                  <td>{{ parent_email }}</td>
+                  <td>{{ contact }}</td>
+                  <td class="text-end">
+                    <div class="d-flex gap-2 justify-content-end">
+                      <form action="{{ url_for('update_student', id=moodle) }}" method="post" class="d-inline-flex gap-2">
+                        <input type="hidden" name="name" value="{{ name }}">
+                        <input type="hidden" name="email" value="{{ email }}">
+                        <input type="hidden" name="parent_email" value="{{ parent_email }}">
+                        <input type="hidden" name="contact_number" value="{{ contact }}">
+                        <button type="submit" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></button>
+                      </form>
+                      <form action="{{ url_for('delete_student', id=moodle) }}" method="post" onsubmit="return confirm('Delete this student?');">
+                        <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+              {% else %}
+                <tr><td colspan="6" class="text-center text-muted">No students found.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

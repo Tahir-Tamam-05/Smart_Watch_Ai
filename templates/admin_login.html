@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Admin Login · AI-based Student Monitoring{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-5">
+    <div class="card card-modern">
+      <div class="card-body">
+        <h4 class="mb-3">Admin Login</h4>
+        <form action="{{ url_for('admin_login') }}" method="post" novalidate>
+          <div class="mb-3">
+            <label for="username" class="form-label">Username <span class="req">*</span></label>
+            <input type="text" class="form-control" id="username" name="username" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password <span class="req">*</span></label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-brand"><i class="bi bi-box-arrow-in-right me-1"></i>Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Visualize Attendance · AI-based Student Monitoring{% endblock %}
+
+{% block content %}
+<h2 class="mb-3">Visualizations</h2>
+
+{% if not plots %}
+  <div class="alert alert-info">No plots available. Generate overall attendance first and ensure data exists.</div>
+{% endif %}
+
+<div class="row g-3">
+  {% for key, img in plots.items() %}
+    <div class="col-md-6">
+      <div class="card card-modern h-100">
+        <div class="card-body">
+          <h5 class="card-title text-capitalize">{{ key.replace('_', ' ') }}</h5>
+          <img class="img-fluid rounded" src="data:image/png;base64,{{ img }}" alt="{{ key }} chart">
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

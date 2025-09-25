@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Email Notifications · AI-based Student Monitoring{% endblock %}
+
+{% block content %}
+<h2 class="mb-3">Email Notifications</h2>
+
+{% if errors and errors|length %}
+  <div class="alert alert-warning">
+    <strong>Some issues occurred:</strong>
+    <ul class="mb-0">
+      {% for e in errors %}<li>{{ e }}</li>{% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+<div class="card card-modern">
+  <div class="card-body">
+    <h5 class="card-title">Sent Emails</h5>
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Enrollment</th>
+            <th>Attendance %</th>
+            <th>Student Email</th>
+            <th>Parent Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in students %}
+            <tr>
+              <td>{{ s.name }}</td>
+              <td>{{ s.enrollment }}</td>
+              <td>{{ '%.2f'|format(s.percentage) }}</td>
+              <td>
+                {% if s.student_email_sent %}
+                  <span class="badge badge-success-soft">Sent</span>
+                {% else %}
+                  <span class="badge badge-danger-soft">Failed</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if s.parent_email_sent %}
+                  <span class="badge badge-success-soft">Sent</span>
+                {% else %}
+                  <span class="badge badge-danger-soft">Failed</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% else %}
+            <tr><td colspan="5" class="text-muted text-center">No notifications sent.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

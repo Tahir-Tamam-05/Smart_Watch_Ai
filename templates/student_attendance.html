@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Process Attendance · AI-based Student Monitoring{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card card-modern">
+      <div class="card-body">
+        <h4 class="mb-3">Process Subject Attendance</h4>
+        <p class="text-secondary">Enter the total number of classes conducted for the chosen subject, then click the respective subject button to process its CSV files.</p>
+
+        <form method="post" class="row gy-3">
+          <div class="col-md-6">
+            <label for="total_classes" class="form-label">Total Classes <span class="req">*</span></label>
+            <input type="number" min="1" class="form-control" id="total_classes" name="total_classes" placeholder="e.g., 30" required>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex flex-wrap gap-2 mt-2">
+              <button type="submit" class="btn btn-brand" formmethod="post" formaction="{{ url_for('spcc') }}">
+                <i class="bi bi-cpu me-1"></i> Process SPCC
+              </button>
+              <button type="submit" class="btn btn-outline-primary" formmethod="post" formaction="{{ url_for('css') }}">
+                <i class="bi bi-diagram-3 me-1"></i> Process CSS
+              </button>
+              <button type="submit" class="btn btn-outline-primary" formmethod="post" formaction="{{ url_for('ai') }}">
+                <i class="bi bi-robot me-1"></i> Process AI
+              </button>
+              <button type="submit" class="btn btn-outline-primary" formmethod="post" formaction="{{ url_for('mc') }}">
+                <i class="bi bi-collection me-1"></i> Process MC
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <hr>
+        <div class="small text-muted">
+          Place CSVs in Attendance_management/Attendance/<subject>/ directories. Student names are mapped from studentdetails.csv or files under StudentDetails/.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
